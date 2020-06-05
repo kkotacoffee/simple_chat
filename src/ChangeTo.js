@@ -2,22 +2,24 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { changeTo } from './Store';
 
+// ほめる相手を変更するためのコンポーネント
+
 class ChangeTo extends Component {
 
   constructor(props){
     super(props);
     this.state = {
-      number: 0
+      number: 0   // デフォルトのほめる相手の番号
     }
     this.doChange = this.doChange.bind(this);
   }
 
   style = {
-    paddingLeft : "100px",
+    paddingLeft : "90px",
     paddingBottom : "10px"
   }
 
-  doChange(e){
+  doChange(e){    // selectが押されるたびに行われる
     let element = document.getElementById("targetto");
     let now = element.value;
     let action = changeTo(now);

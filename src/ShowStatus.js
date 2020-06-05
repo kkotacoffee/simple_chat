@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ShowImage from './ShowImage';
 
+// 現在のユーザーの情報を表示するコンポーネント
+
 class ShowStatus extends Component {
 
   imgstyle = {

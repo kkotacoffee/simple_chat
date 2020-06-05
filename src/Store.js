@@ -1,30 +1,31 @@
 import { createStore } from 'redux';
 
 const initData = {
-    now: 0,
-    to: 0,
-    data: [
-        {name: 'kota', have:100, given:0},
-        {name: 'miho', have:100, given:0},
-        {name: 'kkota', have:100, given:0},
+    now: 0,     // 現在のユーザー
+    to: 0,      // ほめる相手
+    data: [     // ユーザー一覧
+        {name: 'nakaoka', have:100, given:0},
+        {name: 'hirota', have:100, given:0},
+        {name: 'taro', have:100, given:0},
+        {name: 'kotaro', have:100, given:0}
     ],
-    item: [],
+    item: [],       // 投稿一覧
 };
 
 export function wholeReducer(state = initData, action) {
     
     switch(action.type){
 
-        case 'CHANGE':
+        case 'CHANGE':      // 現在のユーザーの変更
             return changeReduce(state,action);
 
-        case 'CHANGETO':
+        case 'CHANGETO':    // ほめる相手の変更
             return changetoReduce(state,action);
 
-        case 'CLAP':
+        case 'CLAP':        // 投稿への拍手
             return clapReduce(state,action);
 
-        case 'ADD':
+        case 'ADD':         // 投稿
             return addReduce(state,action);
 
         default:
@@ -56,20 +57,21 @@ function changetoReduce(state, action){
 }
 
 function clapReduce(state, action){
-    let msgto = action.to;
-    let msgfrom = action.from;
+    let now = state.now;
+    let to = action.to;
+    let from = action.from;
     let newdata = state.data.slice();
     let newitem = state.item.slice();
     let id = action.id;
 
-    newdata[state.now].have -= 2;
-    newdata[msgfrom].given++;
-    newdata[msgto].given++;
+    newdata[now].have -= 2;
+    newdata[from].given++;
+    newdata[to].given++;
 
-    if(newitem[id].clapped[state.now]){
-        newitem[id].clapped[state.now]++;
+    if(newitem[id].clapped[now]){     // 投稿の拍手一覧を更新
+        newitem[id].clapped[now]++;
     }else{
-        newitem[id].clapped[state.now] = 1;
+        newitem[id].clapped[now] = 1;
     }
 
     newitem[id].sum++;
@@ -99,12 +101,12 @@ function addReduce(state, action){
     let f = `${d.getFullYear()}/${d.getMonth()}/${d.getDate()} ${h}:${m}`
    
     let item = {
-        message: action.message,
-        from: state.now,
-        to: state.to,
-        created: f,
-        clapped: {},
-        sum: 0
+        message: action.message,    // メッセージ本文
+        from: state.now,            // ほめた人
+        to: state.to,               // ほめられた人
+        created: f,                 // 作成日時
+        clapped: {},                // 拍手をしたひとと拍手数
+        sum: 0                      // 拍手数の合計
     };
 
     let newitem = state.item.slice();

@@ -2,22 +2,24 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { changeNow } from './Store';
 
+// 使用中のユーザーを変更するためのコンポーネント
+
 class ChangeStatus extends Component {
 
   style = {
-    paddingLeft : "100px",
+    paddingLeft : "90px",
     paddingBottom : "10px"
   }
 
   constructor(props){
     super(props);
     this.state = {
-        number: 0
+        number: 0   // デフォルトのユーザーの番号
     }
     this.doChange = this.doChange.bind(this);
   }
-
-  doChange(e){
+  
+  doChange(e){    // selectが押されるたびに行われる
     let element = document.getElementById("targetnow");
     let now = element.value;
     let action = changeNow(now);

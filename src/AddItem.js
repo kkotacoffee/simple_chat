@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { add } from './Store';
 import ShowImage from './ShowImage';
 
+// 投稿を追加するためのコンポーネント
+
 class AddItem extends Component {
 
   constructor(props){
@@ -39,13 +41,13 @@ class AddItem extends Component {
     fontSize: "15pt",
   }
 
-  doChange(e){
+  doChange(e){    // メッセージ変更時に行われる
     this.setState({
       message: e.target.value
     });
   }
 
-  doAction(e){
+  doAction(e){    // 投稿ボタンが押されたときに行われる
     e.preventDefault();
     if(5 <= this.state.message.length){
       let action = add(this.state.message);
@@ -63,14 +65,14 @@ class AddItem extends Component {
     return (
         <div style = {this.divstyle}>
           <main>
-          <ShowImage num = {this.props.to} style={this.imgstyle}></ShowImage>
+            <ShowImage num = {this.props.to} style={this.imgstyle}/>
           </main>
           <aside>
-          <form onSubmit = {this.doAction} style = {this.formstyle}>
-            <textarea onChange={this.doChange} style={this.inputstyle}
-            value = {this.state.message} cols = "40" rows = "5" required/>
-            <input type = "submit" value="投稿"></input>
-          </form>
+            <form onSubmit = {this.doAction} style = {this.formstyle}>
+              <textarea onChange={this.doChange} style={this.inputstyle}
+              value = {this.state.message} cols = "40" rows = "5" required/>
+              <input type = "submit" value="投稿"></input>
+            </form>
           </aside>
         </div>
     );

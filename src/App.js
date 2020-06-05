@@ -9,10 +9,6 @@ import AddItem from './AddItem';
 
 class App extends Component {
 
-  constructor(props){
-    super(props);
-  }
-
   statusstyle = {
     backgroundColor: "lightBlue"
   }
