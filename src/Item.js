@@ -94,7 +94,7 @@ class Item extends Component {
     inAction(e){        // 拍手数をマウスホバーするたびに行われる
 
         let id = this.props.index;
-        let dom = document.querySelector('#add');
+        let dom = document.querySelector(`#add${id}`);
         let clapper = Object.entries(this.props.item[id].clapped);
 
         clapper.sort(function(a,b){return b[1] - a[1];});
@@ -113,13 +113,17 @@ class Item extends Component {
     }
 
     outAction(e){       // マウスが拍手数から外れるたびに行われる
-        let dom = document.querySelector('#add');
+        let id = this.props.index;
+        let dom = document.querySelector(`#add${id}`);
         let element = "";
 
         ReactDOM.render(element, dom);
     }
 
   render() {
+
+    let ID = this.props.index;
+    ID = `add${ID}`;
 
     return (
         <tbody>
@@ -148,7 +152,7 @@ class Item extends Component {
                     <div><input type = "image" src = {`${process.env.PUBLIC_URL}/images/clap.jpg`} 
                     style = {this.clapstyle} alt = "clap" onClick = {this.doAction}/></div>
                     <div onMouseEnter = {this.inAction} onMouseOut={this.outAction}>{this.props.value.sum}</div>
-                    <div id = "add"></div>
+                    <div id = {ID}></div>
                     <div style = {this.datestyle}>
                         {this.props.value.created}
                     </div>
