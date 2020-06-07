@@ -13,8 +13,8 @@ import * as serviceWorker from './serviceWorker';
 const persistConfig = {
   key:'root',
   storage:storage,
-  blacklist: ['now', 'to', 'data', 'item'],
-  whitelist: []
+  blacklist: ['now', 'to'],     // 初期ユーザーとほめる相手は保存しない
+  whitelist: ['data', 'item']   // 各ユーザーのポイントと投稿は保存する
 };
 
 const persistedReducer = persistReducer(persistConfig, wholeReducer);
